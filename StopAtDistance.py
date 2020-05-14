@@ -7,6 +7,10 @@ from gpiozero import CamJamKitRobot
 pinTrigger = 17
 pinEcho = 18
 distanceToStop = 0.5
+
+leftms = 0.3
+rightms = 0.3
+
 robot = CamJamKitRobot()
 
 sensor = DistanceSensor(echo=pinEcho,trigger=pinTrigger)
@@ -17,7 +21,7 @@ try:
     while True:
         print("Distance:",sensor.distance)
         if sensor.distance >= distanceToStop:
-            robot.forward()
+            robot.value = (leftms, rightms)
             print("{}: forward".format(x))
             x+=1
         else:

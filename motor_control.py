@@ -3,11 +3,11 @@ import time
 
 robot = CamJamKitRobot()
 
-leftms = 0.5
-rightms = 0.5
+leftms = 0.3
+rightms = 0.3
 
 robot.value = (leftms, rightms)
 
-time.sleep(5)
+time.sleep(3)
 
 robot.stop()
