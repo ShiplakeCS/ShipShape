@@ -3,9 +3,9 @@ from flask import Flask, redirect, render_template, url_for, make_response
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisissupposedtobesecret!"
 
-import code
+from gpiozero import CamJamKitRobot
 
-robot = code.CamJamKitRobot()
+robot = CamJamKitRobot()
 
 @app.route("/main", methods=["GET","POST"])
 def mainPage():

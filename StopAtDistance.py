@@ -9,7 +9,7 @@ pinEcho = 18
 distanceToStop = 0.2
 
 leftms = 0.3
-rightms = 0.3
+rightms = 0.35
 
 robot = CamJamKitRobot()
 
