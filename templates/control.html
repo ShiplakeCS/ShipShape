@@ -13,12 +13,20 @@ a.btn {
 }
 </style>
 <body>
+    
+    <div id="camera_stream">
+        <!-- replace robot.local with the hostname or IP of your pi, but keep the :8080 bit at the end -->
+        <img src="http://robot.local:8080/?action=stream" />
+    </div>
+    
+    <div id="controls">
+    
 <a href="/robot/go/forward" class="btn"> FORWARD</a><br>
 <a href="/robot/go/left" class="btn">LEFT</a> <a href="/robot/go/right" class="btn">RIGHT</a><br>
 <a href="/robot/go/backward" class="btn">BACKWARD</a><br>
 <br>
 <a href="/robot/go/stop" class="btn">STOP</a><br>
-
+</div>
 
 
 </body>
