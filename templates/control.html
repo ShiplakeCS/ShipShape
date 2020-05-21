@@ -23,19 +23,19 @@
     
     <div class="container">
   <!-- Content here -->
-      <div id="camera_stream">
+      <div id="camera_stream" class="min-vw-100">
         <!-- replace robot.local with the hostname or IP of your pi, but keep the :8080 bit at the end -->
         <img src="http://robot.local:8080/?action=stream" />
     </div>
     
     <div id="controls" style="width:300px; display:block; border-style:solid; text-align:center; margin-top:50px ">
     
-<a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>
-<a href="/robot/go/left" class="btn btn-secondary spacing">LEFT</a> <a href="/robot/go/right" class="btn btn-secondary spacing">RIGHT</a><br>
-<a href="/robot/go/backward" class="btn btn-secondary spacing">BACKWARD</a><br>
-<br>
-<a href="/robot/go/stop" class="btn btn-danger spacing">STOP</a><br>
-</div>
+        <a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>
+        <a href="/robot/go/left" class="btn btn-secondary spacing">LEFT</a> <a href="/robot/go/right" class="btn btn-secondary spacing">RIGHT</a><br>
+        <a href="/robot/go/backward" class="btn btn-secondary spacing">BACKWARD</a><br>
+        <br>
+        <a href="/robot/go/stop" class="btn btn-danger spacing">STOP</a><br>
+    </div>
 </div>
 
 

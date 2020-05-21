@@ -1,11 +1,18 @@
-import flask
+import flask, time
 from flask import Flask, redirect, render_template, url_for, make_response
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisissupposedtobesecret!"
 
-from gpiozero import CamJamKitRobot
+from gpiozero import CamJamKitRobot, DistanceSensor
 
+pinTrigger = 17
+pinEcho = 18
+distanceToStop = 0.2
+leftms = 0.3
+rightms = 0.35
 robot = CamJamKitRobot()
+sensor = DistanceSensor(echo=pinEcho,trigger=pinTrigger)
+
 
 @app.route("/main", methods=["GET","POST"])
 def mainPage():
@@ -13,7 +20,7 @@ def mainPage():
 
 @app.route("/")
 def start():
-    return "test"
+    return render_template("control.html")
 
 @app.route("/robot/go/right")
 def robotGoRight():
@@ -30,7 +37,14 @@ def robotGoLeft():
 @app.route("/robot/go/forward")
 def robotGoForward():
     global robot
-    robot.forward()
+    #robot.forward()
+    while True:
+        if sensor.distance >= distanceToStop:
+            robot.value = (leftms, rightms)
+        else:
+            robot.stop()
+            break
+        time.sleep(0.1)
     return redirect("/main")
 
 @app.route("/robot/go/backward")
