@@ -22,67 +22,52 @@ def mainPage():
 def start():
     return render_template("control.html")
 
-@app.route("/robot/go/right")
+@app.route("/robot/go/right", methods=["GET", "POST"])
 def robotGoRight():
     global robot
-    while True:
-        if sensor.distance >= distanceToStop:
-            robot.value = (leftms, -rightms)
-        else:
-            robot.stop()
-            break
-        time.sleep(0.1)
+
+    robot.value = (leftms, -rightms)
+    time.sleep(1)
+    robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
-        return 200
+        return "200"
 
-@app.route("/robot/go/left")
+@app.route("/robot/go/left", methods=["GET", "POST"])
 def robotGoLeft():
     global robot
-    while True:
-        if sensor.distance >= distanceToStop:
-            robot.value = (-leftms, rightms)
-        else:
-            robot.stop()
-            break
-        time.sleep(0.1)
+    robot.value = (-leftms, rightms)
+    time.sleep(1)
+    robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
-        return 200
+        return "200"
 
 @app.route("/robot/go/forward", methods=["GET", "POST"])
 def robotGoForward():
     global robot
-    while True:
-        if sensor.distance >= distanceToStop:
-            robot.value = (leftms, rightms)
-        else:
-            robot.stop()
-            break
-        time.sleep(0.1)
+    robot.value = (leftms, rightms)
+    time.sleep(1)
+    robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
-        return 200
+        return "200"
 
-@app.route("/robot/go/backward")
+@app.route("/robot/go/backwards", methods=["GET", "POST"])
 def robotGobackward():
     global robot
-    while True:
-        if sensor.distance >= distanceToStop:
-            robot.value = (-leftms, -rightms)
-        else:
-            robot.stop()
-            break
-        time.sleep(0.1)
+    robot.value = (-leftms, -rightms)
+    time.sleep(1)
+    robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
-        return 200
+        return "200"
 
-@app.route("/robot/go/stop")
+@app.route("/robot/go/stop", methods=["GET", "POST"])
 def robotGoStop():
     global robot
     robot.stop()
@@ -91,7 +76,7 @@ def robotGoStop():
     if request.method == "GET":
         return redirect("/main")
     else:
-        return 200
+        return "200"
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
