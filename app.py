@@ -25,14 +25,32 @@ def start():
 @app.route("/robot/go/right")
 def robotGoRight():
     global robot
-    robot.right()
-    return redirect("/main")
+    while True:
+        if sensor.distance >= distanceToStop:
+            robot.value = (leftms, -rightms)
+        else:
+            robot.stop()
+            break
+        time.sleep(0.1)
+    if request.method == "GET":
+        return redirect("/main")
+    else:
+        return 200
 
 @app.route("/robot/go/left")
 def robotGoLeft():
     global robot
-    robot.left()
-    return redirect("/main")
+    while True:
+        if sensor.distance >= distanceToStop:
+            robot.value = (-leftms, rightms)
+        else:
+            robot.stop()
+            break
+        time.sleep(0.1)
+    if request.method == "GET":
+        return redirect("/main")
+    else:
+        return 200
 
 @app.route("/robot/go/forward", methods=["GET", "POST"])
 def robotGoForward():
@@ -52,14 +70,28 @@ def robotGoForward():
 @app.route("/robot/go/backward")
 def robotGobackward():
     global robot
-    robot.backward()
-    return redirect("/main")
+    while True:
+        if sensor.distance >= distanceToStop:
+            robot.value = (-leftms, -rightms)
+        else:
+            robot.stop()
+            break
+        time.sleep(0.1)
+    if request.method == "GET":
+        return redirect("/main")
+    else:
+        return 200
 
 @app.route("/robot/go/stop")
 def robotGoStop():
     global robot
     robot.stop()
-    return redirect("/main")
+    time.sleep(0.1)
+    
+    if request.method == "GET":
+        return redirect("/main")
+    else:
+        return 200
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
