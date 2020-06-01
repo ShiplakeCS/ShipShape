@@ -18,6 +18,21 @@
     }
     
     </style>
+    
+    <script>
+    
+        function move(direction){
+        
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/robot/go/" + direction, true);
+            xhttp.send();
+            
+        
+        }
+        
+    
+    </script>
+    
 </head>
 <body>
     
@@ -30,7 +45,8 @@
     
     <div id="controls" style="width:300px; display:block; border-style:solid; text-align:center; margin-top:50px ">
     
-        <a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>
+        <button type="button" onclick="move('forward')">Forward</button><br>
+        <!--<a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>-->
         <a href="/robot/go/left" class="btn btn-secondary spacing">LEFT</a> <a href="/robot/go/right" class="btn btn-secondary spacing">RIGHT</a><br>
         <a href="/robot/go/backward" class="btn btn-secondary spacing">BACKWARD</a><br>
         <br>

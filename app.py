@@ -1,5 +1,5 @@
 import flask, time
-from flask import Flask, redirect, render_template, url_for, make_response
+from flask import Flask, redirect, render_template, url_for, make_response, request
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisissupposedtobesecret!"
 
@@ -34,10 +34,9 @@ def robotGoLeft():
     robot.left()
     return redirect("/main")
 
-@app.route("/robot/go/forward")
+@app.route("/robot/go/forward", methods=["GET", "POST"])
 def robotGoForward():
     global robot
-    #robot.forward()
     while True:
         if sensor.distance >= distanceToStop:
             robot.value = (leftms, rightms)
@@ -45,7 +44,10 @@ def robotGoForward():
             robot.stop()
             break
         time.sleep(0.1)
-    return redirect("/main")
+    if request.method == "GET":
+        return redirect("/main")
+    else:
+        return 200
 
 @app.route("/robot/go/backward")
 def robotGobackward():
