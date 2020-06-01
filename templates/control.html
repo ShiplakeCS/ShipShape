@@ -8,58 +8,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <style>
-    
-    .spacing {
-        margin:10px;
-        
-    }
-    
+
+        .spacing {
+            margin: 10px;
+
+        }
+
     </style>
-    
-    <script>
-    
-        function move(direction){
-        
+
+    <script type="text/javascript">
+
+        function move(direction) {
+
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "/robot/go/" + direction, true);
             xhttp.send();
-            
-        
+
         }
-        
-    
+
     </script>
-    
+
 </head>
 <body>
-    
-    <div class="container">
-  <!-- Content here -->
-      <div id="camera_stream" class="min-vw-100">
+
+<div class="container">
+    <!-- Content here -->
+    <div id="camera_stream" class="min-vw-100">
         <!-- replace robot.local with the hostname or IP of your pi, but keep the :8080 bit at the end -->
-        <img src="http://robot.local:8080/?action=stream" />
+        <img src="http://robot.local:8080/?action=stream"/>
     </div>
-    
+
     <div id="controls" style="width:300px; display:block; border-style:solid; text-align:center; margin-top:50px ">
-    
-        <button type="button" onclick="move('forward')">Forward</button><br>
-        <!--<a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>-->
+
+        <button type="button" class="btn btn-secondary spacing" onclick="move('forward')">Forward</button>
+        <br>
+        <button type="button" class="btn btn-secondary spacing" onclick="move('left')">&lt; Left</button>
+        <button type="button" class="btn btn-secondary spacing" onclick="move('right')">Right &gt;</button>
+        <br>
+        <button type="button" class="btn btn-secondary spacing" onclick="move('backwards')">Backwards</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-danger spacing" onclick="move('stop')">Stop</button>
+        <br>
+        <!--<a href="/robot/go/forward" class="btn btn-secondary spacing"> FORWARD</a><br>
         <a href="/robot/go/left" class="btn btn-secondary spacing">LEFT</a> <a href="/robot/go/right" class="btn btn-secondary spacing">RIGHT</a><br>
         <a href="/robot/go/backward" class="btn btn-secondary spacing">BACKWARD</a><br>
         <br>
-        <a href="/robot/go/stop" class="btn btn-danger spacing">STOP</a><br>
+        <a href="/robot/go/stop" class="btn btn-danger spacing">STOP</a><br>-->
     </div>
 </div>
 
 
 <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
 
 </body>
