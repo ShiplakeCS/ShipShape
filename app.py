@@ -14,6 +14,10 @@ robot = CamJamKitRobot()
 sensor = DistanceSensor(echo=pinEcho,trigger=pinTrigger)
 
 
+@app.route("/drag")
+def drag():
+    return render_template("drag.html")
+
 @app.route("/main", methods=["GET","POST"])
 def mainPage():
     return render_template("control.html")
@@ -49,8 +53,8 @@ def robotGoLeft():
 def robotGoForward():
     global robot
     robot.value = (leftms, rightms)
-    time.sleep(1)
-    robot.stop()
+    #time.sleep(1)
+    #robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
@@ -71,7 +75,7 @@ def robotGobackward():
 def robotGoStop():
     global robot
     robot.stop()
-    time.sleep(0.1)
+    #time.sleep(0.1)
     
     if request.method == "GET":
         return redirect("/main")
