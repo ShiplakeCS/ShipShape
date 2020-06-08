@@ -7,6 +7,8 @@ function log(msg) {
 
 function DetermineDirection(xStart,yStart,xEnd,yEnd){
 
+	log("Determining direction...");
+
 	var xDifferent, yDifferent;
 	xDifferent = Math.abs(xEnd - xStart);
 	yDifferent = Math.abs(yEnd - yStart);
@@ -105,6 +107,8 @@ function handleMove(evt) {
 
 	  log("Movement - START: (" + touches[i].pageX + ", " + touches[i].pageY + "), MOVED TO: (" + ongoingTouches[idx].pageX + ", " + ongoingTouches[idx].pageY + ")");
 
+	  DetermineDirection(touches[i].pageX, touches[i].pageY, ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+
 
 	  ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
 	  console.log(".");
@@ -158,7 +162,7 @@ function startup() {
   el.addEventListener("touchend", handleEnd, false);
   el.addEventListener("touchcancel", handleCancel, false);
   el.addEventListener("touchmove", handleMove, false);
-  log("startup() function completed");
+  log("startup() function completed - v2");
 }
 
 document.addEventListener("DOMContentLoaded", startup);
