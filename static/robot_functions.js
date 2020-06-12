@@ -51,7 +51,7 @@ function getRecentDirection(){
   else if ((countRight > countLeft) && (countRight > countForward) && (countRight > countBackwards)){
     return "right";
   }
-  else
+  else if ((countBackwards > countLeft) && (countBackwards > countForward) && (countBackwards > countRight))
   {
     return "backwards";
   }
@@ -190,11 +190,12 @@ function handleCancel(evt) {
 
 function startup() {
   var el = document.getElementById("canvas");
+  //var el = document.getElementsByTagName("body")[0];
   el.addEventListener("touchstart", handleStart, false);
   el.addEventListener("touchend", handleEnd, false);
   el.addEventListener("touchcancel", handleCancel, false);
   el.addEventListener("touchmove", handleMove, false);
-  log("startup() function completed - v2");
+  log("startup() function completed - v3");
 }
 
 document.addEventListener("DOMContentLoaded", startup);
