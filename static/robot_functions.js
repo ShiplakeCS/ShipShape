@@ -1,5 +1,62 @@
 var ongoingTouches = [];
 var mostRecentDirection = "";
+var recentDirections = [];
+
+function addRecentDirection(d){
+
+  let maxSize = 10;
+
+  if (recentDirections.length == maxSize) {
+    recentDirections = recentDirections.splice(0,1);
+    recentDirections.push(d);
+  }
+  else {
+    recentDirections.push(d);
+  }
+
+}
+
+function getRecentDirection(){
+
+  var countLeft = 0, countRight = 0, countForward = 0, countBackwards = 0;
+  
+  for (i = 0; i < recentDirections.length; i++){
+  
+    if (recentDirections[i] == "left"){
+      countLeft++;
+    }
+    else if (recentDirections[i] == "right"){
+      countRight++;
+    }
+    else if (recentDirections[i] == "forward"){
+      countForward++;
+    }
+    else if (recentDirections[i] == "backwards"){
+      countBackwards++;
+    }
+  
+  }
+  
+  log("countFoward: " + countForward);
+  
+  if ((countLeft > countRight) && (countLeft > countForward) && (countLeft > countBackwards)){
+    return "left";
+  } 
+  
+  else if ((countForward > countLeft) && (countForward > countRight) && (countForward > countBackwards)){
+    log("Returning forward");
+    return "forward";
+  }
+
+  else if ((countRight > countLeft) && (countRight > countForward) && (countRight > countBackwards)){
+    return "right";
+  }
+  else
+  {
+    return "backwards";
+  }
+
+}
 
 function move(direction) {
 
@@ -87,7 +144,8 @@ function handleMove(evt) {
     
     if (d != mostRecentDirection) {
     
-      mostRecentDirection = d;
+      addRecentDirection(d);
+      mostRecentDirection = getRecentDirection();
       move(mostRecentDirection);
       
     }
