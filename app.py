@@ -29,10 +29,9 @@ def start():
 @app.route("/robot/go/right", methods=["GET", "POST"])
 def robotGoRight():
     global robot
-
     robot.value = (leftms, -rightms)
-    time.sleep(1)
-    robot.stop()
+    #time.sleep(1)
+    #robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
@@ -42,8 +41,8 @@ def robotGoRight():
 def robotGoLeft():
     global robot
     robot.value = (-leftms, rightms)
-    time.sleep(1)
-    robot.stop()
+    #time.sleep(1)
+    #robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
@@ -64,8 +63,8 @@ def robotGoForward():
 def robotGobackward():
     global robot
     robot.value = (-leftms, -rightms)
-    time.sleep(1)
-    robot.stop()
+    #time.sleep(1)
+    #robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
