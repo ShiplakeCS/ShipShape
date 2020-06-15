@@ -61,8 +61,10 @@ function getRecentDirection(){
 function move(direction) {
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/robot/go/" + direction, true);
-    xhttp.send();
+    if (direction){
+      xhttp.open("POST", "/robot/go/" + direction, true);
+      xhttp.send();
+    }
 
 }
 
@@ -182,6 +184,9 @@ function handleCancel(evt) {
   console.log("touchcancel.");
   var touches = evt.changedTouches;
   
+  mostRecentDirection = "stop";
+  move(mostRecentDirection);
+  
   for (var i = 0; i < touches.length; i++) {
 	var idx = ongoingTouchIndexById(touches[i].identifier);
 	ongoingTouches.splice(idx, 1);  // remove it; we're done
@@ -189,13 +194,13 @@ function handleCancel(evt) {
 }
 
 function startup() {
-  var el = document.getElementById("canvas");
+  var el = document.getElementById("camera_stream");
   //var el = document.getElementsByTagName("body")[0];
   el.addEventListener("touchstart", handleStart, false);
   el.addEventListener("touchend", handleEnd, false);
   el.addEventListener("touchcancel", handleCancel, false);
   el.addEventListener("touchmove", handleMove, false);
-  log("startup() function completed - v3");
+  log("startup() function completed - v4");
 }
 
 document.addEventListener("DOMContentLoaded", startup);

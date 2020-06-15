@@ -8,8 +8,8 @@ from gpiozero import CamJamKitRobot, DistanceSensor
 pinTrigger = 17
 pinEcho = 18
 distanceToStop = 0.2
-leftms = 0.3
-rightms = 0.35
+leftms = 0.6
+rightms = 0.6
 robot = CamJamKitRobot()
 sensor = DistanceSensor(echo=pinEcho,trigger=pinTrigger)
 
@@ -29,7 +29,7 @@ def start():
 @app.route("/robot/go/right", methods=["GET", "POST"])
 def robotGoRight():
     global robot
-    robot.value = (leftms, -rightms)
+    robot.value = (1, -1)
     #time.sleep(1)
     #robot.stop()
     if request.method == "GET":
@@ -40,7 +40,7 @@ def robotGoRight():
 @app.route("/robot/go/left", methods=["GET", "POST"])
 def robotGoLeft():
     global robot
-    robot.value = (-leftms, rightms)
+    robot.value = (-1, 1)
     #time.sleep(1)
     #robot.stop()
     if request.method == "GET":
