@@ -2,6 +2,24 @@ var ongoingTouches = [];
 var mostRecentDirection = "";
 var recentDirections = [];
 
+
+function updateDistanceDisplay(){
+  
+  var xhttp = new XMLHttpRequest();
+  
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       document.getElementById("distance_display").innerHTML = xhttp.responseText + "cm";
+    }
+  };
+   
+  xhttp.open("POST", "/data/distance", true);
+  xhttp.send();
+  
+}
+
+
+
 function addRecentDirection(d){
 
   let maxSize = 10;
@@ -65,6 +83,8 @@ function move(direction) {
       xhttp.open("POST", "/robot/go/" + direction, true);
       xhttp.send();
     }
+
+  updateDistanceDisplay();
 
 }
 
@@ -152,6 +172,7 @@ function handleMove(evt) {
       
     }
 
+    
     ongoingTouches.splice(idx, 1, copyTouch(touches[0]));  // swap in the new touch record
     
   } 
@@ -200,7 +221,8 @@ function startup() {
   el.addEventListener("touchend", handleEnd, false);
   el.addEventListener("touchcancel", handleCancel, false);
   el.addEventListener("touchmove", handleMove, false);
-  log("startup() function completed - v4");
+  updateDistanceDisplay();
+  log("startup() function completed - v5");
 }
 
 document.addEventListener("DOMContentLoaded", startup);

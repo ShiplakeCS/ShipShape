@@ -80,6 +80,13 @@ def robotGoStop():
         return redirect("/main")
     else:
         return "200"
+        
+        
+@app.route("/data/distance", methods=['POST', 'GET'])
+def getDistance():
+    global sensor
+    return str(sensor.distance * 100)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

@@ -43,20 +43,28 @@ Using https://developer.mozilla.org/en-US/docs/Web/API/Touch_events to learn abo
     </div>
 
 	<div class="row">
-    <div id="controls" class="col" style="display:block; border-style:solid; text-align:center; margin-top:50px ">
+	    <div id="controls" class="col" style="display:block; border-style:solid; text-align:center; margin-top:50px ">
 
-        <button type="button" class="btn btn-secondary spacing" onmousedown="move('forward')" onmouseup="move('stop')">Forward</button>
-        <br>
-        <button type="button" class="btn btn-secondary spacing" onclick="move('left')">&lt; Left</button>
-        <button type="button" class="btn btn-secondary spacing" onclick="move('right')">Right &gt;</button>
-        <br>
-        <button type="button" class="btn btn-secondary spacing" onclick="move('backwards')">Backwards</button>
-        <br>
-        <br>
-        <button type="button" class="btn btn-danger spacing" onclick="move('stop')">Stop</button>
-        <br>
+		<button type="button" class="btn btn-secondary spacing" onmousedown="move('forward')" onmouseup="move('stop')">Forward</button>
+		<br>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('left')">&lt; Left</button>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('right')">Right &gt;</button>
+		<br>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('backwards')">Backwards</button>
+		<br>
+		<br>
+		<button type="button" class="btn btn-danger spacing" onclick="move('stop')">Stop</button>
+		<br>
 
-    </div>
+	    </div>
+	<div id="info" class="col">
+		<p>Distance from nearest object:</p>
+		<p id='distance_display'></p>
+		<p>Select power</p>
+		<button type="button" class="btn btn-secondary spacing">High</button><br>
+		<button type="button" class="btn btn-secondary spacing">Medium</button><br>
+		<button type="button" class="btn btn-secondary spacing">Low</button>
+	</div>
     </div>
 </div>
 	
