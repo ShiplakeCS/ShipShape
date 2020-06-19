@@ -43,6 +43,7 @@ Using https://developer.mozilla.org/en-US/docs/Web/API/Touch_events to learn abo
     </div>
 
 	<div class="row">
+<<<<<<< HEAD
     <div id="controls" class="col" style="display:block; border-style:solid; text-align:center; margin-top:50px ">
 
         <button type="button" class="btn btn-secondary spacing" onmousedown="move('forward')" onmouseup="move('stop')">Forward</button>
@@ -65,6 +66,30 @@ Using https://developer.mozilla.org/en-US/docs/Web/API/Touch_events to learn abo
 		<button type="button" class="btn btn-secondary spacing" onclick="power('high')">High</button><br>
 		<button type="button" class="btn btn-secondary spacing" onclick="power('medium')">Medium</button><br>
 		<button type="button" class="btn btn-secondary spacing" onclick="power('low')">Low</button>
+=======
+	    <div id="controls" class="col" style="display:block; border-style:solid; text-align:center; margin-top:50px ">
+
+		<button type="button" class="btn btn-secondary spacing" onmousedown="move('forward')" onmouseup="move('stop')">Forward</button>
+		<br>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('left')">&lt; Left</button>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('right')">Right &gt;</button>
+		<br>
+		<button type="button" class="btn btn-secondary spacing" onclick="move('backwards')">Backwards</button>
+		<br>
+		<br>
+		<button type="button" class="btn btn-danger spacing" onclick="move('stop')">Stop</button>
+		<br>
+
+	    </div>
+	<div id="info" class="col">
+		<p>Distance from nearest object:</p>
+		<p id='distance_display'></p>
+		<p>Select power</p>
+		<button type="button" class="btn btn-secondary spacing">High</button><br>
+		<button type="button" class="btn btn-secondary spacing">Medium</button><br>
+		<button type="button" class="btn btn-secondary spacing">Low</button>
+	</div>
+>>>>>>> 5ba15ffe9d9afeabff6c9dda6f2cd0d9eee9aaca
     </div>
 </div>
 	
