@@ -51,7 +51,7 @@ def robotGoLeft():
 @app.route("/robot/go/forward", methods=["GET", "POST"])
 def robotGoForward():
     global robot
-    robot.value = (leftms, rightms)
+    robot.value = (leftms*robotPowerLevel, rightms*robotPowerLevel)
     #time.sleep(1)
     #robot.stop()
     if request.method == "GET":
@@ -62,13 +62,28 @@ def robotGoForward():
 @app.route("/robot/go/backwards", methods=["GET", "POST"])
 def robotGobackward():
     global robot
-    robot.value = (-leftms, -rightms)
+    robot.value = (-leftms*robotPowerLevel, -rightms*robotPowerLevel)
     #time.sleep(1)
     #robot.stop()
     if request.method == "GET":
         return redirect("/main")
     else:
         return "200"
+
+
+
+@app.route("/robot/set/power/<level>", methods=["GET", "POST"])
+def setRobotPower(level):
+    global robotPowerLevel
+    print(level)
+    if level == "high":
+        robotPowerLevel = 1
+
+    if level == "medium":
+        robotPowerLevel = 0.5
+
+    if level == "low":
+        robotPowerLevel = 0.25
 
 @app.route("/robot/go/stop", methods=["GET", "POST"])
 def robotGoStop():

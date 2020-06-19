@@ -105,6 +105,16 @@ function DetermineDirection(xStart,yStart,xEnd,yEnd){
 	
 }
 
+function power(level){
+    if (level){
+
+        xhttp.open("POST", "/robot/set/power/" + level, true);
+        xhttp.send();
+	log("Level: " + level);
+
+    }
+
+}
 
 function copyTouch({ identifier, pageX, pageY }) {
 	return { identifier, pageX, pageY };
