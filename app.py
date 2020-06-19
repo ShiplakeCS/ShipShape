@@ -1,5 +1,5 @@
 import flask, time
-from flask import Flask, redirect, render_template, url_for, make_response, request
+from flask import Flask, redirect, render_template, url_for, make_response, request, session
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisissupposedtobesecret!"
 
@@ -13,9 +13,10 @@ rightms = 0.6
 robot = CamJamKitRobot()
 sensor = DistanceSensor(echo=pinEcho,trigger=pinTrigger)
 
-
 @app.route("/drag")
 def drag():
+    if 'power' not in session:
+        session['power'] = 0.5
     return render_template("drag.html")
 
 @app.route("/main", methods=["GET","POST"])
@@ -24,14 +25,17 @@ def mainPage():
 
 @app.route("/")
 def start():
+    if 'power' not in session:
+        session['power'] = 0.5
     return render_template("control.html")
 
 @app.route("/robot/go/right", methods=["GET", "POST"])
 def robotGoRight():
-    global robot
-    robot.value = (1, -1)
-    #time.sleep(1)
-    #robot.stop()
+    global robot, leftms, rightms
+    robotPowerLevel = session['power']
+    print("Right - power: " + str(session['power']))
+    robot.value = (leftms * robotPowerLevel, -rightms * robotPowerLevel)
+
     if request.method == "GET":
         return redirect("/main")
     else:
@@ -39,10 +43,11 @@ def robotGoRight():
 
 @app.route("/robot/go/left", methods=["GET", "POST"])
 def robotGoLeft():
-    global robot
-    robot.value = (-1, 1)
-    #time.sleep(1)
-    #robot.stop()
+    global robot, leftms, rightms
+    robotPowerLevel = session['power']
+    print("Left - power: " + str(session['power']))
+    robot.value = (-leftms * robotPowerLevel, rightms * robotPowerLevel)
+
     if request.method == "GET":
         return redirect("/main")
     else:
@@ -50,40 +55,43 @@ def robotGoLeft():
 
 @app.route("/robot/go/forward", methods=["GET", "POST"])
 def robotGoForward():
-    global robot
+    global robot,leftms, rightms
+    print("Forward - power: " + str(session['power']))
+    robotPowerLevel = session['power']
     robot.value = (leftms*robotPowerLevel, rightms*robotPowerLevel)
-    #time.sleep(1)
-    #robot.stop()
+
     if request.method == "GET":
         return redirect("/main")
     else:
         return "200"
 
 @app.route("/robot/go/backwards", methods=["GET", "POST"])
-def robotGobackward():
-    global robot
+def robotGoBackward():
+    global robot, leftms, rightms
+    robotPowerLevel = session['power']
+    print("Backwards - power: " + str(session['power']))
     robot.value = (-leftms*robotPowerLevel, -rightms*robotPowerLevel)
-    #time.sleep(1)
-    #robot.stop()
+
     if request.method == "GET":
         return redirect("/main")
     else:
         return "200"
 
 
-
 @app.route("/robot/set/power/<level>", methods=["GET", "POST"])
 def setRobotPower(level):
-    global robotPowerLevel
     print(level)
     if level == "high":
-        robotPowerLevel = 1
+        session['power'] = 1
 
     if level == "medium":
-        robotPowerLevel = 0.5
+        session['power'] = 0.5
 
     if level == "low":
-        robotPowerLevel = 0.25
+        session['power'] = 0.25
+    
+    return str(session['power'])
+
 
 @app.route("/robot/go/stop", methods=["GET", "POST"])
 def robotGoStop():
@@ -101,6 +109,11 @@ def robotGoStop():
 def getDistance():
     global sensor
     return str(sensor.distance * 100)
+    
+
+@app.route("/data/power", methods=['POST', 'GET'])
+def getPower():
+    return str(session['power'])
 
 
 if __name__ == '__main__':
