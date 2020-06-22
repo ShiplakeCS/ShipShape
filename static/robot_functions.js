@@ -126,15 +126,54 @@ function DetermineDirection(xStart,yStart,xEnd,yEnd){
 }
 
 function power(level){
+  
     if (level){
+      
+      var xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+	   updatePowerButtons(level);
+	}
+      };
 
-        xhttp.open("POST", "/robot/set/power/" + level, true);
-        xhttp.send();
-	log("Level: " + level);
+   xhttp.open("POST", "/robot/set/power/" + level, true);
+   xhttp.send();
+   log("Level: " + level);
 
-    }
+  }
 
 }
+
+function updatePowerButtons(power){
+
+  document.getElementById("btnHighPower").classList.remove('btn-success');
+  document.getElementById("btnMediumPower").classList.remove('btn-success');
+  document.getElementById("btnLowPower").classList.remove('btn-success');
+
+  if (power == "high") {
+  
+    b = document.getElementById("btnHighPower");
+
+  }
+  
+  else if (power == "medium") {
+      
+      b = document.getElementById("btnMediumPower");
+  
+  }
+
+  else if (power == "low") {
+      
+      b = document.getElementById("btnLowPower");
+  
+  }
+
+  //b.classList.remove('btn-secondary');
+  b.classList.add('btn-success');
+
+}
+
 
 function copyTouch({ identifier, pageX, pageY }) {
 	return { identifier, pageX, pageY };
@@ -232,7 +271,7 @@ function startup() {
   el.addEventListener("touchcancel", handleCancel, false);
   el.addEventListener("touchmove", handleMove, false);
   updateDistanceDisplay();
-  log("startup() function completed - v5");
+  log("startup() function completed - v6");
 }
 
 document.addEventListener("DOMContentLoaded", startup);
