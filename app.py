@@ -27,7 +27,7 @@ def mainPage():
 def start():
     if 'power' not in session:
         session['power'] = 0.5
-    return render_template("control.html")
+    return render_template("drag.html")
 
 @app.route("/robot/go/right", methods=["GET", "POST"])
 def robotGoRight():
@@ -97,6 +97,7 @@ def setRobotPower(level):
 def robotGoStop():
     global robot
     robot.stop()
+    print("Received instruction to STOP")
     #time.sleep(0.1)
     
     if request.method == "GET":
